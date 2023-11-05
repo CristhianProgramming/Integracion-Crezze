@@ -19,6 +19,7 @@ public class RegistrosModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
