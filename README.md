@@ -14,5 +14,4 @@ Para compilar el código, ejecuta el siguiente comando:
 ```shell
 ./mvnw package
 
-```shell
 docker-compose up
