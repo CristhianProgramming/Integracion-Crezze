@@ -2,6 +2,7 @@ package com.crezze.administator.service.implement;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,25 +17,40 @@ import com.crezze.administator.service.IRegistrosService;
 @Service
 public class RegistrosServiceImplement implements IRegistrosService {
 
-	@Autowired private IRegistrosDao registroDao;
-	@Autowired private IUserDao userDao;
-	
+	@Autowired
+	private IRegistrosDao registroDao;
+	@Autowired
+	private IUserDao userDao;
+
 	@Override
 	public RegistrosModel createRegistro(Double peso, Double altura) {
-		RegistrosModel saveRegistro = new RegistrosModel(getUserId(),peso,altura);
+		RegistrosModel saveRegistro = new RegistrosModel(getUserId(), peso, altura);
 		return registroDao.save(saveRegistro);
 	}
 
 	@Override
 	public List<RegistrosModel> obtenerRegistros(Date from, Date late) {
-		
 		return (List<RegistrosModel>) registroDao.findAllByUser(getUserId());
 	}
-	
+
 	private UserModel getUserId() {
 		String nombreUsuario = SecurityContextHolder.getContext().getAuthentication().getName();
 		var usuario = userDao.findByUsername(nombreUsuario);
 		return usuario;
+	}
+
+	@Override
+	public Optional<RegistrosModel> eliminarRegistro(Long id) {
+		var registro = registroDao.findById(id);
+		try {
+			if (registro.isPresent()) {
+				registroDao.deleteById(id);
+			}
+			return registro;
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 }

@@ -3,7 +3,6 @@ package com.crezze.administator.models;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -19,7 +18,6 @@ public class RegistrosModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonIgnore
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
