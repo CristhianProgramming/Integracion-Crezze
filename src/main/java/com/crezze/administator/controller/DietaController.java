@@ -22,7 +22,7 @@ public class DietaController {
 	@Autowired
 	private IDietaService dietaService;
 
-	@GetMapping("/dietas")
+	@GetMapping("/dieta")
 	ResponseEntity<?> getDietas() {
 		return ResponseEntity.ok(dietaService.obtenerMisDietas());
 	}
