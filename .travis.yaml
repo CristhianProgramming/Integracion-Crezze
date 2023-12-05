@@ -1,4 +1,24 @@
 language: java
 jdk:
-  - openjdk8
-script: ./mvnw clean install
+  - openjdk11
+
+branches:
+  only:
+    - st
+
+cache:
+  directories:
+    - $HOME/.m2
+
+before_install:
+  - chmod +x mvnw
+
+script:
+  - ./mvnw clean install
+
+notifications:
+  email:
+    recipients:
+      - m11mario11m@gmail.com
+    on_success: never
+    on_failure: always
