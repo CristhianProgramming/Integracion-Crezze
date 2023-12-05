@@ -26,7 +26,6 @@ public class jpaUserDetailService implements UserDetailsService{
 		
 		List<GrantedAuthority> authorizations = new ArrayList<GrantedAuthority>();
 		
-
 		if (user == null) {
 			throw new UsernameNotFoundException("usuario no encontrado");
 		}
